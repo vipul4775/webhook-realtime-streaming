@@ -52,7 +52,7 @@ cors.allowed-origins=http://localhost:3000
 ```http
 POST /webhooks/events
 Content-Type: application/json
-X-Signature: <hmac-sha256-hex>
+X-Signature: sha256=<signature>
 
 {
   "type": "user.created",
@@ -76,7 +76,7 @@ GET /events
 
 ### WebSocket Connection
 ```
-ws://localhost:8080/ws/events
+ws://localhost:8080/ws
 ```
 
 Receives JSON events in real-time.

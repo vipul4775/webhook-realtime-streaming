@@ -37,7 +37,7 @@ Create `.env` file (copy from `.env.example`):
 
 ```env
 REACT_APP_API_URL=http://localhost:8080
-REACT_APP_WS_URL=ws://localhost:8080
+REACT_APP_WS_URL=ws://localhost:8080/ws
 ```
 
 ## Project Structure

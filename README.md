@@ -1,6 +1,19 @@
-# Real-Time Event Pipeline
+# Real-Time Event Pipeline (Webhooks + WebSocket + SSE)
 
-A complete end-to-end real-time event pipeline that ingests webhook events and streams them to a live UI using WebSocket and Server-Sent Events (SSE).
+Production-ready real-time event pipeline using Webhooks, WebSocket, and Server-Sent Events (SSE), built with Spring Boot and React for streaming live updates to frontend applications.
+
+This project simulates real-world webhook providers and demonstrates production-ready patterns for ingesting, verifying, and streaming events to live clients.
+
+## 💡 The Problem
+
+Traditional polling is inefficient - clients repeatedly ask "any updates?" wasting bandwidth and adding latency. This project demonstrates real-time push architecture: webhooks deliver events to your backend, which instantly streams them to connected clients via WebSocket or SSE.
+
+## 🎯 Use Cases
+
+- **Payment Processing**: Real-time payment status updates (Stripe, Razorpay webhooks)
+- **Call Tracking**: Live call status and analytics dashboards
+- **Order Management**: Instant order status updates across systems
+- **Notifications**: Push notifications to web/mobile clients without polling
 
 ## 🎯 What You'll Learn
 
@@ -9,6 +22,15 @@ A complete end-to-end real-time event pipeline that ingests webhook events and s
 - **Frontend Integration**: React hooks for WebSocket/SSE connections
 - **Event Broadcasting**: Composite pattern for multi-protocol support
 - **Production Patterns**: Error handling, connection management, and cleanup
+
+## 🔄 WebSocket vs SSE
+
+| Feature | WebSocket | SSE |
+|---------|-----------|-----|
+| **Direction** | Bi-directional | Server → Client only |
+| **Complexity** | Higher | Lower |
+| **Best For** | Chat, gaming, collaborative editing | Live feeds, notifications, dashboards |
+| **Reconnection** | Manual | Automatic |
 
 ## 🏗️ Architecture
 
@@ -25,6 +47,8 @@ A complete end-to-end real-time event pipeline that ingests webhook events and s
                      │    Store     │
                      └──────────────┘
 ```
+This flow shows how webhook events are ingested, processed, and pushed to clients in real-time.
+It ensures low-latency, event-driven updates without relying on polling.
 
 ## 🚀 Quick Start
 
@@ -38,21 +62,47 @@ A complete end-to-end real-time event pipeline that ingests webhook events and s
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/realtime-event-pipeline.git
-cd realtime-event-pipeline
+git clone https://github.com/vipul4775/webhook-realtime-streaming.git
+cd webhook-realtime-streaming
 
-# Start all services (Linux/Mac)
+# Using Makefile (Linux/Mac - recommended)
+make run      # Auto-install dependencies and start all services
+
+# Or manually
+make install  # Install dependencies
+make start    # Start all services
+
+# Or using startup scripts
 chmod +x start-all.sh
-./start-all.sh
-
-# Or on Windows
-start-all.bat
+./start-all.sh  # Linux/Mac
+start-all.bat   # Windows
 ```
 
 This starts:
 - Backend on `http://localhost:8080`
 - Frontend on `http://localhost:3000`
 - Generator sending events every second
+
+### Using Makefile Commands
+
+```bash
+# View all available commands
+make help
+
+# Quick start (auto-install + start)
+make run              # Recommended for first-time setup
+
+# Common commands
+make install          # Install all dependencies
+make start            # Start all services
+make stop             # Stop all services
+make restart          # Restart all services
+make test             # Run tests
+make build            # Build for production
+make logs             # View logs
+make health           # Check service health
+make clean            # Clean build artifacts
+```
 
 ### Manual Setup
 
@@ -124,7 +174,7 @@ const INTERVAL_MS = 1000;
 ```http
 POST /webhooks/events
 Content-Type: application/json
-X-Signature: <hmac-sha256-signature>
+X-Signature: sha256=<signature>
 
 {
   "type": "user.created",
@@ -139,7 +189,7 @@ GET /events
 
 ### WebSocket Connection
 ```javascript
-ws://localhost:8080/ws/events
+ws://localhost:8080/ws
 ```
 
 ### SSE Connection
@@ -167,7 +217,7 @@ curl -X POST http://localhost:8080/webhooks/events \
 ## 📁 Project Structure
 
 ```
-realtime-event-pipeline/
+webhook-realtime-streaming/
 ├── backend/           # Spring Boot application
 │   ├── src/
 │   │   ├── main/
@@ -196,6 +246,16 @@ realtime-event-pipeline/
 └── README.md
 ```
 
+## 🚀 Production Considerations
+
+For production deployment:
+
+- **Persistence**: Replace in-memory storage with PostgreSQL/MongoDB
+- **Message Broker**: Use Kafka or Redis Pub/Sub for event distribution
+- **Scaling**: Implement sticky sessions for WebSocket load balancing
+- **Security**: Store secrets in vault (AWS Secrets Manager, HashiCorp Vault)
+- **Monitoring**: Add metrics for connection count, event throughput
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -215,6 +275,10 @@ If you have questions or run into issues:
 - Open an issue on GitHub
 - Check existing issues for solutions
 - Review the code - it's well-commented!
+
+## 🔍 Keywords
+
+webhook, webhook-integration, websocket, sse, server-sent-events, realtime, spring-boot, react, event-driven, streaming, dashboard
 
 ---
 
