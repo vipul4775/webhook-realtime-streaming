@@ -1,0 +1,17 @@
+/* Navigation component styles */
+
+.nav-button {
+  background-color: transparent;
+}
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-button-active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-button-active:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}

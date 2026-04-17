@@ -1,0 +1,34 @@
+/* Dashboard page styles */
+
+.dashboard-container {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* Stat cards with different colors */
+.stat-card {
+  color: white;
+}
+
+.stat-card-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-card-secondary {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.stat-card-success {
+  background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+}
+
+.stat-card-warning {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
